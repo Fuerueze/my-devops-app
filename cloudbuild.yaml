@@ -22,3 +22,5 @@ steps:
 
 images:
   - 'gcr.io/cr-vs-gke/my-devops-app:latest'
+
+logs_bucket: 'gs://my-logs-bucket98'
