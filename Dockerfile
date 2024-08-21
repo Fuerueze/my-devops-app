@@ -15,6 +15,7 @@ COPY . .
 # Build the Go application
 RUN go build -o main .
 
+
 # Stage 2: Final stage
 FROM alpine:latest
 
