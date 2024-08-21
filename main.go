@@ -3,12 +3,18 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 )
 
 func main() {
+	port := os.Getenv("PORT") // Get the port from the environment variable
+	if port == "" {
+		port = "8080" // Default to 8080 if not set
+	}
+
 	http.HandleFunc("/", handler)
-	fmt.Println("Server listening on port 8080")
-	http.ListenAndServe(":8080", nil)
+	fmt.Printf("Server listening on port %s\n", port)
+	http.ListenAndServe(":"+port, nil)
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {

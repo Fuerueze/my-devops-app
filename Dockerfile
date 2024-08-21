@@ -1,5 +1,3 @@
-#Erklärungen hier: https://medium.com/@anshita.bhasin/a-step-by-step-guide-to-create-dockerfile-9e3744deeeeddddede
-
 # Stage 1: Build stage
 FROM golang:1.22 AS build
 
@@ -15,7 +13,6 @@ COPY . .
 # Build the Go application
 RUN go build -o main .
 
-
 # Stage 2: Final stage
 FROM alpine:latest
 
@@ -24,5 +21,8 @@ WORKDIR /root/
 # Copy the binary from the build stage
 COPY --from=build /app/main .
 
+# Expose port 8080
+EXPOSE 8080
+
 # Command to run the application
-CMD ["./main"]
+CMD ["/app/main"]
