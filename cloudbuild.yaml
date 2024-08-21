@@ -5,7 +5,7 @@ steps:
       - '-c'
       - |
         go test ./...
-        GOOS=linux GOARCH=amd64 go build -o main -mod=tidy .
+        GOOS=linux GOARCH=amd64 go build -o main .
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/cr-vs-gke/my-devops-app:${SHORT_SHA}', '-f', 'Dockerfile', '.']
   - name: 'gcr.io/cloud-builders/docker'
