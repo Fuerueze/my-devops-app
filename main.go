@@ -18,5 +18,5 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello from Cloud Run, Trigger funktioniert!!")
+	fmt.Fprintf(w, "Hello from Cloud Run, Trigger funktioniert!! Meeting am 3.09.2024")
 }
