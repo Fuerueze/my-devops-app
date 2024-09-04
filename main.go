@@ -1,22 +1,36 @@
+
+// Sample run-helloworld is a minimal Cloud Run service.
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"os"
+        "fmt"
+        "log"
+        "net/http"
+        "os"
 )
 
 func main() {
-	port := os.Getenv("PORT") // Get the port from the environment variable
-	if port == "" {
-		port = "8080" // Default to 8080 if not set
-	}
+        log.Print("starting server...")
+        http.HandleFunc("/", handler)
 
-	http.HandleFunc("/", handler)
-	fmt.Printf("Server listening on port %s\n", port)
-	http.ListenAndServe(":"+port, nil)
+        // Determine port for HTTP service.
+        port := os.Getenv("PORT")
+        if port == "" {
+                port = "8080"
+                log.Printf("defaulting to port %s", port)
+        }
+
+        // Start HTTP server.
+        log.Printf("listening on port %s", port)
+        if err := http.ListenAndServe(":"+port, nil); err != nil {
+                log.Fatal(err)
+        }
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello from Kiel. New line")
+        name := os.Getenv("NAME")
+        if name == "" {
+                name = "World"
+        }
+        fmt.Fprintf(w, "Hello %s!\n", name)
 }
