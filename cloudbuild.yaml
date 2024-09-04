@@ -1,18 +1,13 @@
 steps:
-  - name: 'golang:1.22'
-    entrypoint: 'sh'
-    args:
-      - '-c'
-      - |
-        go test ./...
-        GOOS=linux GOARCH=amd64 go build -o main .
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/cr-vs-gke/my-devops-app:${SHORT_SHA}', '-f', 'Dockerfile', '.']
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/cr-vs-gke/my-devops-app:${SHORT_SHA}']
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['run', 'deploy', 'my-cloud-run-service', '--image', 'gcr.io/cr-vs-gke/my-devops-app:${SHORT_SHA}', '--region', 'us-central1', '--platform', 'managed']
-images:
-  - 'gcr.io/cr-vs-gke/my-devops-app:${SHORT_SHA}'
-
-logs_bucket: 'gs://my-logs-bucket98'
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'my-devops-app-service'
+  - '--source'
+  - '.'
+  - '--platform'
+  - 'managed'
+  - '--allow-unauthenticated'
+  - '--region'
+  - 'us-central1'
