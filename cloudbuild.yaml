@@ -3,7 +3,7 @@ steps:
   args:
   - 'run'
   - 'deploy'
-  - 'my-devops-app-service'
+  - 'berlin'
   - '--source'
   - '.'
   - '--platform'
