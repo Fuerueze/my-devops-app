@@ -30,7 +30,7 @@ func main() {
 func handler(w http.ResponseWriter, r *http.Request) {
         name := os.Getenv("NAME")
         if name == "" {
-                name = "APFELLIEBE"
+                name = "APFELLIEBE!"
         }
         fmt.Fprintf(w, "Hello %s!\n", name)
 }
